@@ -40,6 +40,17 @@
 
 		//表示する
 		renderer.render( scene, camera );
+
+		//アニメーションの追加
+		( function renderLoop () {
+			requestAnimationFrame( renderLoop );
+			mesh.rotation.set(
+				0,
+				mesh.rotation.y + 0.01,
+				mesh.rotation.z + 0.01
+			)
+			renderer.render( scene, camera );
+		} )();
 	};
 	window.addEventListener('DOMContentLoaded', main, false);
 </script>
