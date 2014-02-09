@@ -9,7 +9,37 @@
 <script src="three.min.js"></script>
 <script>
 	var main = function (){
-	//ここに処理を記述
+		//シーンを設置
+		var scene = new THREE.scene();
+
+		//カメラを作成
+		var width = 600;
+		var height = 400;
+		var fov = 60;
+		var aspect = width/height;
+		var near = 1000;
+		var far = 1000;
+		var camera = new THREE.PerspectiveCamera( fov, aspect, near, far);
+		camera.position.set( 0, 0, 50);
+
+		//レンダラーをDOM上に設置
+		var renderer =new THREE.WebGLRenderer();
+		renderer.setSize( width, height );
+		document.body.appendChild( renderer.domElement);
+
+		//光源を追加
+		var directionalLight = new THREE.DirectionalLight(0xffffff);
+		directionalLight.position.set(0, 0.7, 0.7);
+		scene.add(directionalLight);
+
+		//物体の追加
+		var geometry = new THREE.CubuGeometry( 30, 30, 30);
+		var material = new THREE.MeshPhongMaterial( { color: oxffff00} );
+		var mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+
+		//表示する
+		renderer.render( scene, camera );
 	};
 	window.addEventListener('DOMContentLoaded', main, false);
 </script>
